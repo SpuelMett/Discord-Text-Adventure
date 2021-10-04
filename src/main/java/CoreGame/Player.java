@@ -103,11 +103,69 @@ public class Player implements java.io.Serializable{
 
     }
 
-    public void equipWeapon(ItemWeapon newWeapon){
-        fightStats.removeAttack(weapon.getDamage());
-        weapon = newWeapon;
-        fightStats.addAttack(weapon.getDamage());
-
+    /**
+     * Return imput Item if Item cant be equiped
+     * @param newEquipment
+     * @return
+     */
+    public String equip(IItem newEquipment){
+        //check item Type
+        if(newEquipment == null) return "You don't have this item in your inventory";
+        //Check for Armor and Weapon
+        if(newEquipment.getClass().getName().equals(ItemArmor.class.getName())) return equipArmor((ItemArmor) newEquipment);
+        if(newEquipment.getClass().getName().equals(ItemWeapon.class.getName())) return equipWeapon((ItemWeapon) newEquipment);
+        else return "You cant equip " + newEquipment.getName() + ".";
     }
+    public String unequip(IItem oldEquipment){
+        if(oldEquipment == null) return "You don't have this item in your inventory";
+        if(oldEquipment.getClass().getName().equals(ItemArmor.class.getName()) ) return equipArmor((ItemArmor) oldEquipment);
+        if(oldEquipment.getClass().getName().equals(ItemWeapon.class.getName())) return equipWeapon((ItemWeapon) oldEquipment);
+        else return "You cant unequip that.";
+    }
+
+    /**
+     * Returns old weapon if changed, null if it worked
+     * @param newWeapon
+     * @return
+     */
+    public String equipWeapon(ItemWeapon newWeapon){
+        //check if player has a weapon equiped
+        if(weapon == null){
+            weapon = newWeapon;
+            fightStats.addAttack(weapon.getDamage());
+            inventory.removeItem(newWeapon);
+            return "You equipped " + weapon.getName() + ".";
+        }
+        else return "You cant equip " + weapon.getName() + ".";
+    }
+    public String equipArmor(ItemArmor newArmor){
+        //check if player has a weapon equipped
+        if(armor == null){
+            armor = newArmor;
+            fightStats.addDefence(armor.getDefence());
+            inventory.removeItem(newArmor);
+            return "You equipped " + armor.getName() + ".";
+        }
+        else return "You cant equip " + armor.getName() + ".";
+    }
+    public String unequipWeapon(){
+        if(weapon == null) return "You don't have this weapon equipped";
+        else{
+            fightStats.removeAttack(weapon.getDamage());
+            inventory.addItem(weapon);
+            weapon = null;
+            return "You unequipped your Weapon";
+        }
+    }
+    public String unequipArmor(){
+        if(armor == null) return "You don't have this armor equipped";
+        else{
+            fightStats.removeDefence(armor.getDefence());
+            inventory.addItem(armor);
+            armor = null;
+            return "You Unequipped your armor";
+        }
+    }
+
 
 }

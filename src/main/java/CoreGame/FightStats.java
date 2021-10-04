@@ -28,6 +28,12 @@ public class FightStats implements java.io.Serializable{
     public void addAttack(int value){
         attack += value;
     }
+    public void addDefence(int value) {
+        defense += value;
+    }
+    public void removeDefence(int value){
+        defense -= value;
+    }
 
     /**
      * Return false, if the controller dies

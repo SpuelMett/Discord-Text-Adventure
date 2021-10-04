@@ -34,8 +34,8 @@ public class CommandHandler {
         if(commandString.equals("secretCommand")) return secretCommand();
         if(commandString.equals("speak")) return speak();
         if(commandString.equals("attack")) return attack();
-        if(commandString.equals("equip")) return attack();
-        if(commandString.equals("deequip")) return attack();
+        if(commandString.equals("equip")) return equip();
+        if(commandString.equals("unequip")) return unequip();
 
         return "I don't know what you want.";
     }
@@ -256,14 +256,25 @@ public class CommandHandler {
 
     private String equip(){
         if(!command.hasSecondWord()) return "What do you want to equip?";
+
         String itemName = command.getSecondWord();
         IItem item = currentPlayer.getItem(itemName);
 
         if(item == null) return "You don't seem to have this Item.";
 
-        //currentPlayer.equip(item);
+        //check if Player can equip the item
+        return currentPlayer.equip(item);
 
-        return "test";
+
+    }
+
+    private String unequip(){
+        if(!command.hasSecondWord()) return "What do you want to deequip?";
+
+        String itemName = command.getSecondWord();
+        IItem item = currentPlayer.getItem(itemName);
+
+        return currentPlayer.unequip(item);
     }
 
 }
