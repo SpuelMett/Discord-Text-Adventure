@@ -95,6 +95,10 @@ public class Player implements java.io.Serializable{
         sb.append("Health: ").append(fightStats.getHealth()).append("\n");
         sb.append("Saturation: ").append(saturation).append("\n");
         sb.append("Hydration: ").append(hydration).append("\n");
+        sb.append("\n");
+        if(weapon != null) sb.append("Weapon: ").append(weapon.getName()).append("\n");
+        if(armor != null)sb.append("Armor: ").append(armor.getName()).append("\n");
+        sb.append("\n");
         sb.append(inventory.getDescription());
         return  sb.toString();
     }

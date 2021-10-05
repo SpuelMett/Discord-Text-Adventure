@@ -134,6 +134,7 @@ public class CommandHandler {
         if(command.hasSecondWord()){
             String secondWord = command.getSecondWord().toLowerCase();
             if(secondWord.equals("player")) return playerInfo();
+            if(secondWord.equals("stats")) return playerInfo();
             if(secondWord.equals("room")) return roomInfo();
             return "What information do you want?";
         }
