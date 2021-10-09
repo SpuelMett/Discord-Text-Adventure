@@ -270,12 +270,12 @@ public class CommandHandler {
     }
 
     private String unequip(){
-        if(!command.hasSecondWord()) return "What do you want to deequip?";
+        if(!command.hasSecondWord()) return "What do you want to unequip?";
 
         String itemName = command.getSecondWord();
-        IItem item = currentPlayer.getItem(itemName);
+        //IItem item = currentPlayer.getItem(itemName);
 
-        return currentPlayer.unequip(item);
+        return currentPlayer.unequip(itemName);
     }
 
 }

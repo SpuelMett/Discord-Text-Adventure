@@ -28,7 +28,7 @@ public class CommandChanger {
     private static final String[] equip
             = {"equip"};
     private static final String[] unequip
-            = {"deequip","unequip"};
+            = {"unequip","deequip"};
 
 
     /**

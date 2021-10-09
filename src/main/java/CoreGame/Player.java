@@ -120,11 +120,11 @@ public class Player implements java.io.Serializable{
         if(newEquipment.getClass().getName().equals(ItemWeapon.class.getName())) return equipWeapon((ItemWeapon) newEquipment);
         else return "You cant equip " + newEquipment.getName() + ".";
     }
-    public String unequip(IItem oldEquipment){
-        if(oldEquipment == null) return "You don't have this item in your inventory";
-        if(oldEquipment.getClass().getName().equals(ItemArmor.class.getName()) ) return equipArmor((ItemArmor) oldEquipment);
-        if(oldEquipment.getClass().getName().equals(ItemWeapon.class.getName())) return equipWeapon((ItemWeapon) oldEquipment);
-        else return "You cant unequip that.";
+    public String unequip(String equipmentName){
+        if(weapon !=null && weapon.getName().equals(equipmentName)) return unequipWeapon();
+        if(armor !=null && armor.getName().equals(equipmentName)) return unequipArmor();
+        
+        return "You don't have this item quipped.";
     }
 
     /**

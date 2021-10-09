@@ -13,7 +13,9 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
 
     Room room1,room2;
     IDoor door12;
-    IItem item1, item2, food1, drink1;
+    IItem food1, drink1;
+    ItemWeapon woodSword,ironSword;
+    ItemArmor armor1;
     IEnemy dragon1;
     INpc npc1;
 
@@ -33,15 +35,15 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
 
         door12 = new Door(room1,room2,"north","south");
 
-        item1 = new Item("WoodenSword","This is a normal wooden sword.",1,1);
-        item2 = new Item("IronSword","This is a normal iron sword.",1,1);
+        woodSword = new ItemWeapon("WoodenSword","This is a normal wooden sword.",1,1,1);
+        ironSword = new ItemWeapon("IronSword","This is a normal iron sword.",1,1,2);
 
         food1 = new ItemFood("Apple", "A normal Apple", 1, 1, 10);
         drink1 = new ItemDrink("Water", "A bottle of water", 1, 1, 20);
 
         //place Items
-        room1.addItem(item1);
-        room2.addItem(item2);
+        room1.addItem(woodSword);
+        room2.addItem(ironSword);
         room1.addItem(food1);
         room2.addItem(drink1);
 
