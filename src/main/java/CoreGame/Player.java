@@ -24,7 +24,7 @@ public class Player implements java.io.Serializable{
 
 
     public Player(Room room){
-        fightStats = new FightStats(100, 20, 20);
+        fightStats = new FightStats(100, 10, 10);
 
         this.saturation = 10;
         this.hydration = 10;
@@ -96,11 +96,21 @@ public class Player implements java.io.Serializable{
         sb.append("Saturation: ").append(saturation).append("\n");
         sb.append("Hydration: ").append(hydration).append("\n");
         sb.append("\n");
+
         if(weapon != null) sb.append("Weapon: ").append(weapon.getName()).append("\n");
         if(armor != null)sb.append("Armor: ").append(armor.getName()).append("\n");
+
+        sb.append(getStatDescription());
         sb.append("\n");
         sb.append(inventory.getDescription());
         return  sb.toString();
+    }
+
+    public String getStatDescription(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Attack: ").append(fightStats.getAttack()).append("\n");
+        sb.append("Defence: ").append(fightStats.getDefence()).append("\n");;
+        return sb.toString();
     }
 
     public void death(String reason){

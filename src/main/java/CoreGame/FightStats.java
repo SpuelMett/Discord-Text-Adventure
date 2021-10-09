@@ -46,7 +46,7 @@ public class FightStats implements java.io.Serializable{
         return damage;
     }
 
-    public int getDefense() {
+    public int getDefence() {
         return defense;
     }
     public void removeDefense(int value){
