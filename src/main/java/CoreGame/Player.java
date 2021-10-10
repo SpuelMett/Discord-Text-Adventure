@@ -181,5 +181,18 @@ public class Player implements java.io.Serializable{
         }
     }
 
+    public boolean checkDead(){
+        if(saturation < 1) return true;
+        if(hydration < 1) return true;
+        if(fightStats.getHealth() < 1) return true;
+
+        return false;
+    }
+
+    public void die(){
+
+
+    }
+
 
 }

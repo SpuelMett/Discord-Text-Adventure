@@ -36,6 +36,7 @@ public class CommandHandler {
         if(commandString.equals("attack")) return attack();
         if(commandString.equals("equip")) return equip();
         if(commandString.equals("unequip")) return unequip();
+        if(commandString.equals("die")) return die();
 
         return "I don't know what you want.";
     }
@@ -276,6 +277,11 @@ public class CommandHandler {
         //IItem item = currentPlayer.getItem(itemName);
 
         return currentPlayer.unequip(itemName);
+    }
+
+    private String die(){
+        currentPlayer.removeHydration(200);
+        return "You died.";
     }
 
 }

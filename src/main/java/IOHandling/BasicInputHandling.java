@@ -54,6 +54,12 @@ public class BasicInputHandling {
             //get the player Object
             player = getPlayer(msg, currentGame);
 
+            //check if the player is dead. If yes create a new Player
+            if(isPlayerDead(player)){
+                createPlayerOnServer(msg, currentGame);
+                return "You seem new to this world. I created some stats for you and gave you basic gear.";
+            }
+
             //create Command and remove !! from input
             Parser parser = new Parser();
             String playerInput = msg.getContentRaw().substring(2);
@@ -82,6 +88,15 @@ public class BasicInputHandling {
         int author = msg.getAuthor().hashCode();
         Player player = currentGame.isPlayer(author);
         return player!=null;
+    }
+
+    /**
+     * Checks if the Player is Dead
+     * @param player
+     * @return
+     */
+    private boolean isPlayerDead(Player player){
+        return  player.checkDead();
     }
     private Player getPlayer(Message msg, Game currentGame){
         int author = msg.getAuthor().hashCode();

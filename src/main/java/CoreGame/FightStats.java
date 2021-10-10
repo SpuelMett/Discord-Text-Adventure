@@ -6,13 +6,13 @@ public class FightStats implements java.io.Serializable{
     int maxHealth;
 
     int attack;
-    int defense;
+    int defence;
 
     public FightStats(int health, int attack, int defense){
         this.health = health;
         this.maxHealth = health;
         this.attack = attack;
-        this.defense = defense;
+        this.defence = defense;
     }
 
     public int getHealth(){
@@ -29,10 +29,10 @@ public class FightStats implements java.io.Serializable{
         attack += value;
     }
     public void addDefence(int value) {
-        defense += value;
+        defence += value;
     }
     public void removeDefence(int value){
-        defense -= value;
+        defence -= value;
     }
 
     /**
@@ -41,16 +41,17 @@ public class FightStats implements java.io.Serializable{
      * @return
      */
     public int attacked(int damage){
-        damage = defense - damage;
-        health -= damage;
-        return damage;
+        int hit = damage - defence;
+        if(hit < 0) hit = 0;
+        health -= hit;
+        return hit;
     }
 
     public int getDefence() {
-        return defense;
+        return defence;
     }
     public void removeDefense(int value){
-        defense -= value;
+        defence -= value;
     }
 
     public boolean isDead(){

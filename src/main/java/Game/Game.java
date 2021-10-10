@@ -40,7 +40,7 @@ public class Game implements java.io.Serializable{
     }
 
     /**
-     * Create a new standard Player.
+     * Create a new standard Player. Should override old player
      * @param playerID
      * @return
      */

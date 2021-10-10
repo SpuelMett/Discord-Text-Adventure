@@ -8,7 +8,7 @@ public class CommandChanger {
     private static final String[] go
             = {"go", "move"};
     private static final String[] pick
-            = {"pick", "pickup"};
+            = {"pick", "pickup","take"};
     private static final String[] drop
             = {"drop"};
     private static final String[] info
@@ -29,6 +29,8 @@ public class CommandChanger {
             = {"equip"};
     private static final String[] unequip
             = {"unequip","deequip"};
+    private static final String[] die
+            = {"die"};
 
 
     /**
@@ -49,6 +51,7 @@ public class CommandChanger {
         if(Arrays.asList(attack).contains(input)) return "attack";
         if(Arrays.asList(equip).contains(input)) return "equip";
         if(Arrays.asList(unequip).contains(input)) return "unequip";
+        if(Arrays.asList(die).contains(input)) return "die";
 
         //default
         return null;
@@ -70,7 +73,8 @@ public class CommandChanger {
         sb.append(speak[0]).append(", ");
         sb.append(attack[0]).append(", ");
         sb.append(equip[0]).append(", ");
-        sb.append(unequip[0]);
+        sb.append(unequip[0]).append(", ");
+        sb.append(die[0]);
         return sb.toString();
     }
 }

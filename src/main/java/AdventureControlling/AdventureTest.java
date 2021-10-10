@@ -48,7 +48,7 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
         room2.addItem(drink1);
 
         //Enemies
-        FightStats dragonFightStats = new FightStats(200, 10, 20);
+        FightStats dragonFightStats = new FightStats(10, 11, 5);
         dragon1 = new Enemy("Dragon", "This is a terrifying dragon.", dragonFightStats);
         room1.addEnemy(dragon1);
 

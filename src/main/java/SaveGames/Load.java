@@ -20,7 +20,7 @@ public class Load {
         GameFiles gameFiles;
 
         try{
-            FileInputStream fileIn = new FileInputStream("SavedGameFiles/saveFile1.ser");
+            FileInputStream fileIn = new FileInputStream("SavedGameFiles/saveFile2.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             gameFiles = (GameFiles) in.readObject();
             in.close();
