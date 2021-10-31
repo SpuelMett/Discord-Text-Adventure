@@ -1,6 +1,9 @@
-package CoreGame;
+package CoreGame.Room;
 
 import CoreGame.Enemy.IEnemy;
+import CoreGame.IDoor;
+import CoreGame.INpc;
+import CoreGame.Inventory.Inventory;
 import CoreGame.Items.*;
 
 import java.util.ArrayList;

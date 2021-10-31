@@ -1,4 +1,4 @@
-package CoreGame;
+package CoreGame.Inventory;
 
 import CoreGame.Items.*;
 
@@ -11,6 +11,11 @@ public class Inventory implements java.io.Serializable{
     public Inventory(){
         itemList = new ArrayList<>();
     }
+
+    public ArrayList<IItem> getItemList(){
+        return itemList;
+    }
+
 
     public int getSize(){
         return itemList.size();

@@ -57,7 +57,7 @@ public class BasicInputHandling {
             //check if the player is dead. If yes create a new Player
             if(isPlayerDead(player)){
                 createPlayerOnServer(msg, currentGame);
-                return "You seem new to this world. I created some stats for you and gave you basic gear.";
+                return "You seem new to world. I created some stats for you and gave you basic gear.";
             }
 
             //create Command and remove !! from input

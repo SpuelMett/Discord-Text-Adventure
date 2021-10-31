@@ -1,6 +1,7 @@
 package AdventureControlling;
 
 
+import CoreGame.Room.Room;
 import Parsing.*;
 import CoreGame.*;
 

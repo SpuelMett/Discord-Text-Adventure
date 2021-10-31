@@ -1,6 +1,7 @@
 package CoreGame;
 
 import CoreGame.Items.*;
+import CoreGame.Room.Room;
 
 public class Door implements IDoor, java.io.Serializable{
 

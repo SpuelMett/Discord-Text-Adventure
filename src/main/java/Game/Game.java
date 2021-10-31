@@ -3,7 +3,7 @@ package Game;
 import AdventureControlling.AdventureTest;
 import AdventureControlling.*;
 import CoreGame.*;
-import net.dv8tion.jda.api.entities.Guild;
+import CoreGame.Room.Room;
 
 import java.util.HashMap;
 

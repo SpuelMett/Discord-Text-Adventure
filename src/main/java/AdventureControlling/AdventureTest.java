@@ -3,6 +3,7 @@ package AdventureControlling;
 import CoreGame.*;
 import CoreGame.Items.*;
 import CoreGame.Enemy.*;
+import CoreGame.Room.Room;
 import Parsing.*;
 
 
@@ -14,8 +15,7 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
     Room room1,room2;
     IDoor door12;
     IItem food1, drink1;
-    ItemWeapon woodSword,ironSword;
-    ItemArmor armor1;
+    IItem woodSword,ironSword, armor1;
     IEnemy dragon1;
     INpc npc1;
 
@@ -35,11 +35,11 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
 
         door12 = new Door(room1,room2,"north","south");
 
-        woodSword = new ItemWeapon("WoodenSword","This is a normal wooden sword.",1,1,1);
-        ironSword = new ItemWeapon("IronSword","This is a normal iron sword.",1,1,2);
+        woodSword = new Item("WoodenSword","This is a normal wooden sword.",1,1,"weapon", 1);
+        ironSword = new Item("IronSword","This is a normal iron sword.",1,1,"weapon", 2);
 
-        food1 = new ItemFood("Apple", "A normal Apple", 1, 1, 10);
-        drink1 = new ItemDrink("Water", "A bottle of water", 1, 1, 20);
+        food1 = new Item("Apple", "A normal Apple", 1, 1, "food", 10);
+        drink1 = new Item("Water", "A bottle of water", 1, 1,"drink",  20);
 
         //place Items
         room1.addItem(woodSword);

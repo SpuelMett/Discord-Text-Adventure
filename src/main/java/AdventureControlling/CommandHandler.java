@@ -3,6 +3,7 @@ package AdventureControlling;
 import CoreGame.Enemy.*;
 import CoreGame.*;
 import CoreGame.Items.*;
+import CoreGame.Room.Room;
 import Parsing.*;
 
 public class CommandHandler {
@@ -80,7 +81,7 @@ public class CommandHandler {
             result += "\n" + newRoom.getDescription();
 
             //remove saturation
-            currentPlayer.removeSaturation(1);
+            currentPlayer.removeSatiation(1);
             return result;
         }
         //If there is no new room
@@ -166,17 +167,15 @@ public class CommandHandler {
         String itemName = command.getSecondWord();
         IItem food = currentPlayer.getItem(itemName);
         if(food == null) return "You don't have this Item in your bag.";
-        if(!food.getClass().getName().equals(ItemFood.class.getName())) return "You can't eat this.";
+        if(!food.getType().equals("food")) return "You can't eat this.";
 
 
-        ItemFood itemFood = (ItemFood) food;
+        int hunger = food.getTypeValue();
 
-        int hunger = itemFood.getHunger();
-
-        currentPlayer.addSaturation(hunger);
+        currentPlayer.addSatiation(hunger);
         currentPlayer.dropItem(itemName);
 
-        return "You eat " + itemName + " and restored " + hunger + " saturation.";
+        return "You eat " + itemName + " and restored " + hunger + " satiation.";
     }
 
     private String drink(){
@@ -186,11 +185,9 @@ public class CommandHandler {
         String itemName = command.getSecondWord();
         IItem drink = currentPlayer.getItem(itemName);
         if(drink == null) return "You don't have this Item in your bag.";
-        if(!drink.getClass().getName().equals(ItemDrink.class.getName())) return "You can't drink this.";
+        if(!drink.getType().equals("drink")) return "You can't drink this.";
 
-        ItemDrink itemDrink = (ItemDrink) drink;
-
-        int thirst = itemDrink.getThirst();
+        int thirst = drink.getTypeValue();
 
         currentPlayer.addHydration(thirst);
         currentPlayer.dropItem(itemName);
@@ -222,7 +219,7 @@ public class CommandHandler {
         if(enemy == null) return "There is nothing like this here.";
 
         //Change fix values
-        currentPlayer.removeSaturation(1);
+        currentPlayer.removeSatiation(1);
 
         //get fight controller
         FightStats playerFightStats = currentPlayer.getFightStats();
