@@ -1,6 +1,6 @@
 package CoreGame.Enemy;
 
-import CoreGame.*;
+import CoreGame.Player.IFightStatsModule;
 
 public interface IEnemy {
     String getName();
@@ -8,8 +8,5 @@ public interface IEnemy {
     String getDeathSound();
     String getAttackSound();
 
-    int getAttack();
-    //FightStats getFightStats();
-    int attacked(int damage);
-    boolean isDead();
+    IFightStatsModule getFightStatsModule();
 }

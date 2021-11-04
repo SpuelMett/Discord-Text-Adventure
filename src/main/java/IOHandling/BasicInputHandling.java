@@ -2,10 +2,10 @@ package IOHandling;
 
 
 import AdventureControlling.CommandHandler;
+import CoreGame.Player.Player;
 import Parsing.*;
 import Game.*;
 
-import CoreGame.*;
 import SaveGames.*;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;

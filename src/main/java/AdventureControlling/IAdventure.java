@@ -1,9 +1,9 @@
 package AdventureControlling;
 
 
+import CoreGame.Player.Player;
 import CoreGame.Room.Room;
 import Parsing.*;
-import CoreGame.*;
 
 public interface IAdventure {
 

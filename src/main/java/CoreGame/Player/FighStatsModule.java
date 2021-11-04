@@ -1,14 +1,15 @@
-package CoreGame;
+package CoreGame.Player;
 
-public abstract class Character {
+import CoreGame.Player.IFightStatsModule;
 
+public class FighStatsModule implements IFightStatsModule, java.io.Serializable{
     int health;
     int maxHealth;
 
     int attack;
     int defence;
 
-    public Character(int health, int attack, int defense){
+    public FighStatsModule(int health, int attack, int defense){
         this.health = health;
         this.maxHealth = health;
         this.attack = attack;
@@ -18,6 +19,7 @@ public abstract class Character {
     public int getHealth(){
         return health;
     }
+
     public int getAttack() {
         return attack;
     }
@@ -33,6 +35,7 @@ public abstract class Character {
     public void removeDefence(int value){
         defence -= value;
     }
+
     /**
      * Return false, if the controller dies
      * @param damage
@@ -44,12 +47,14 @@ public abstract class Character {
         health -= hit;
         return hit;
     }
+
     public int getDefence() {
         return defence;
     }
     public void removeDefense(int value){
         defence -= value;
     }
+
     public boolean isDead(){
         return health == 0;
     }

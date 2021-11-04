@@ -1,13 +1,15 @@
 package CoreGame.Enemy;
 
-import CoreGame.Character;
+import CoreGame.Player.FighStatsModule;
+import CoreGame.Player.IFightStatsModule;
 
-public class Enemy extends Character implements IEnemy, java.io.Serializable{
+public class Enemy implements IEnemy, java.io.Serializable{
 
     private Breed breed;
+    private IFightStatsModule fightStatsModule;
 
     public Enemy(Breed breed){
-        super(breed.getHealth(), breed.getAttack(), breed.getDefence());
+        fightStatsModule = new FighStatsModule(breed.getHealth(), breed.getAttack(), breed.getDefence());
         this.breed = breed;
     }
 
@@ -23,5 +25,9 @@ public class Enemy extends Character implements IEnemy, java.io.Serializable{
     }
     public String getAttackSound(){
         return breed.getAttackSound();
+    }
+
+    public IFightStatsModule getFightStatsModule(){
+        return fightStatsModule;
     }
 }

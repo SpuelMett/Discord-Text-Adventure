@@ -4,6 +4,7 @@ import CoreGame.Enemy.*;
 import CoreGame.*;
 import CoreGame.Items.*;
 import CoreGame.Npc.INpc;
+import CoreGame.Player.Player;
 import CoreGame.Room.Room;
 import Parsing.*;
 
@@ -224,28 +225,28 @@ public class CommandHandler {
 
         //start result String
         StringBuilder sb = new StringBuilder();
-        sb.append("You attacked ").append(enemy.getName()).append(" and made ");
+        sb.append("You attacked the ").append(enemy.getName()).append(" and made ");
 
         //Player attacks
-        int attackValue = currentPlayer.getAttack();
-        int damage = enemy.attacked(attackValue);
+        int attackValue = currentPlayer.getFightStatsModule().getAttack();
+        int damage = enemy.getFightStatsModule().attacked(attackValue);
         sb.append(damage).append(" damage.").append("\n");
 
         //Check if enemy is dead
-        if(enemy.isDead()){
-            sb.append("You killed ").append(enemy.getName()).append(". ");
+        if(enemy.getFightStatsModule().isDead()){
+            sb.append("You killed the ").append(enemy.getName()).append(". ");
             sb.append(enemy.getDeathSound());
             currentRoom.removeEnemy(enemy);
             return sb.toString();
         }
 
         //Attack from Enemy
-        attackValue = enemy.getAttack();
-        damage = currentPlayer.attacked(attackValue);
+        attackValue = enemy.getFightStatsModule().getAttack();
+        damage = currentPlayer.getFightStatsModule().attacked(attackValue);
         sb.append(enemy.getAttackSound()).append(" and made ").append(damage).append(" damage.");
 
         //Check if Player is Dead
-        if(currentPlayer.isDead()){
+        if(currentPlayer.getFightStatsModule().isDead()){
             sb.append("The ").append(enemy.getName()).append(" killed you.");
         }
 
@@ -261,7 +262,7 @@ public class CommandHandler {
         if(item == null) return "You don't seem to have this Item.";
 
         //check if Player can equip the item
-        return currentPlayer.equip(item);
+        return currentPlayer.getEquipmentModule().equip(item);
 
 
     }
@@ -272,7 +273,7 @@ public class CommandHandler {
         String itemName = command.getSecondWord();
         //IItem item = currentPlayer.getItem(itemName);
 
-        return currentPlayer.unequip(itemName);
+        return currentPlayer.getEquipmentModule().unequip(itemName);
     }
 
     private String die(){

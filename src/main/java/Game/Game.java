@@ -2,7 +2,7 @@ package Game;
 
 import AdventureControlling.AdventureTest;
 import AdventureControlling.*;
-import CoreGame.*;
+import CoreGame.Player.Player;
 import CoreGame.Room.Room;
 
 import java.util.HashMap;

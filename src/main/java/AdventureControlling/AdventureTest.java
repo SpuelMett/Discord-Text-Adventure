@@ -5,6 +5,7 @@ import CoreGame.Items.*;
 import CoreGame.Enemy.*;
 import CoreGame.Npc.INpc;
 import CoreGame.Npc.Npc;
+import CoreGame.Player.Player;
 import CoreGame.Room.Room;
 import Parsing.*;
 
@@ -52,7 +53,7 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
         //Enemies
         Breed troll = new Breed(null, "Troll", "A normal troll.", "The troll hit you with his big fist", "The troll falls backwards.",10, 5, 10);
         Breed trollArcher = new Breed(troll, "Troll Archer", "A troll with a bow.","The troll hit you with an arrow of his bow", null,  0, 7, 0);
-        Breed dragon = new Breed(null, "Dragon", "A terrifying Dragon.", "The dragon hit you with his sharp claws", "The dragon died.", 10, 10, 1);
+        Breed dragon = new Breed(null, "Dragon", "A terrifying Dragon.", "The dragon hit you with his sharp claws", "The dragon died with a loud roar.", 10, 10, 1);
 
         IEnemy troll1 = new Enemy(troll);
         IEnemy dragon1 = new Enemy(dragon);
