@@ -47,7 +47,7 @@ public class Game implements java.io.Serializable{
     public Player addPlayer(int playerID){
         //create standard Player
         Room startRoom = adventure.getStartRoom();
-        Player newPlayer = new Player(startRoom);
+        Player newPlayer = new Player(startRoom, 20, 5, 5);
 
         //put player and id in the List
         playerList.put(playerID, newPlayer);

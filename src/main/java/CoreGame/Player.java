@@ -5,7 +5,7 @@ import CoreGame.Items.*;
 import CoreGame.Room.Room;
 
 
-public class Player implements java.io.Serializable{
+public class Player extends Character implements java.io.Serializable{
 
     //stats
     int satiation;
@@ -14,7 +14,7 @@ public class Player implements java.io.Serializable{
     final int maxHydration = 100;
 
     //fighting stats
-    FightStats fightStats;
+    //FightStats fightStats;
 
     Inventory inventory;
     Room room;
@@ -24,8 +24,10 @@ public class Player implements java.io.Serializable{
 
 
 
-    public Player(Room room){
-        fightStats = new FightStats(100, 10, 10);
+    public Player(Room room, int health, int attack, int defense){
+        super(health, attack, defense);
+
+        //fightStats = new FightStats(health, attack, defense);
 
         this.satiation = 10;
         this.hydration = 10;
@@ -68,9 +70,12 @@ public class Player implements java.io.Serializable{
         return inventory.getItem(itemName);
     }
 
+    /*
     public FightStats getFightStats() {
         return fightStats;
     }
+
+     */
 
     public void addSatiation(int newHunger){
         satiation += newHunger;
@@ -93,7 +98,7 @@ public class Player implements java.io.Serializable{
     public String getDescription(){
         StringBuilder sb = new StringBuilder();
         sb.append("You: ").append("\n");
-        sb.append("Health: ").append(fightStats.getHealth()).append("\n");
+        sb.append("Health: ").append(health).append("\n");
         sb.append("Satiation: ").append(satiation).append("\n");
         sb.append("Hydration: ").append(hydration).append("\n");
         sb.append("\n");
@@ -109,8 +114,8 @@ public class Player implements java.io.Serializable{
 
     public String getStatDescription(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Attack: ").append(fightStats.getAttack()).append("\n");
-        sb.append("Defence: ").append(fightStats.getDefence()).append("\n");;
+        sb.append("Attack: ").append(getAttack()).append("\n");
+        sb.append("Defence: ").append(getDefence()).append("\n");;
         return sb.toString();
     }
 
@@ -126,10 +131,19 @@ public class Player implements java.io.Serializable{
     public String equip(IItem newEquipment){
         //check item Type
         if(newEquipment == null) return "You don't have this item in your inventory";
+
         //Check for Armor and Weapon
-        if(newEquipment.getType().equals("armor")) return equipArmor(newEquipment);
-        if(newEquipment.getType().equals("weapon")) return equipWeapon(newEquipment);
-        else return "You cant equip " + newEquipment.getName() + ".";
+        String itemType = newEquipment.getType();
+
+        switch (itemType) {
+            case "armor":
+                return equipArmor(newEquipment);
+            case "weapon":
+                return equipWeapon(newEquipment);
+            default:
+                return "You cant equip " + newEquipment.getName() + ".";
+        }
+
     }
     public String unequip(String equipmentName){
         if(weapon !=null && weapon.getName().equals(equipmentName)) return unequipWeapon();
@@ -147,7 +161,7 @@ public class Player implements java.io.Serializable{
         //check if player has a weapon equiped
         if(weapon == null){
             weapon = newWeapon;
-            fightStats.addAttack(weapon.getTypeValue());
+            addAttack(weapon.getTypeValue());
             inventory.removeItem(newWeapon);
             return "You equipped " + weapon.getName() + ".";
         }
@@ -157,7 +171,7 @@ public class Player implements java.io.Serializable{
         //check if player has a weapon equipped
         if(armor == null){
             armor = newArmor;
-            fightStats.addDefence(armor.getTypeValue());
+            addDefence(armor.getTypeValue());
             inventory.removeItem(newArmor);
             return "You equipped " + armor.getName() + ".";
         }
@@ -166,7 +180,7 @@ public class Player implements java.io.Serializable{
     public String unequipWeapon(){
         if(weapon == null) return "You don't have this weapon equipped";
         else{
-            fightStats.removeAttack(weapon.getTypeValue());
+            removeAttack(weapon.getTypeValue());
             inventory.addItem(weapon);
             weapon = null;
             return "You unequipped your Weapon";
@@ -175,7 +189,7 @@ public class Player implements java.io.Serializable{
     public String unequipArmor(){
         if(armor == null) return "You don't have this armor equipped";
         else{
-            fightStats.removeDefence(armor.getTypeValue());
+            removeDefence(armor.getTypeValue());
             inventory.addItem(armor);
             armor = null;
             return "You Unequipped your armor";
@@ -185,7 +199,7 @@ public class Player implements java.io.Serializable{
     public boolean checkDead(){
         if(satiation < 1) return true;
         if(hydration < 1) return true;
-        if(fightStats.getHealth() < 1) return true;
+        if(getHealth() < 1) return true;
 
         return false;
     }

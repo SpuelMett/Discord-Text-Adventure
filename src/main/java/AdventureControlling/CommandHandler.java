@@ -3,13 +3,14 @@ package AdventureControlling;
 import CoreGame.Enemy.*;
 import CoreGame.*;
 import CoreGame.Items.*;
+import CoreGame.Npc.INpc;
 import CoreGame.Room.Room;
 import Parsing.*;
 
 public class CommandHandler {
 
-    private Player currentPlayer;
-    private Command command;
+    private final Player currentPlayer;
+    private final Command command;
 
     public CommandHandler(Player player, Command command){
         this.command = command;
@@ -221,33 +222,31 @@ public class CommandHandler {
         //Change fix values
         currentPlayer.removeSatiation(1);
 
-        //get fight controller
-        FightStats playerFightStats = currentPlayer.getFightStats();
-        FightStats enemyFightStats = enemy.getFightStats();
-
+        //start result String
         StringBuilder sb = new StringBuilder();
-        sb.append("You attacked ").append(npcName).append(" and made ");
+        sb.append("You attacked ").append(enemy.getName()).append(" and made ");
 
-        int attackValue = playerFightStats.getAttack();
-        int damage = enemyFightStats.attacked(attackValue);
-
+        //Player attacks
+        int attackValue = currentPlayer.getAttack();
+        int damage = enemy.attacked(attackValue);
         sb.append(damage).append(" damage.").append("\n");
 
         //Check if enemy is dead
-        if(enemyFightStats.isDead()){
-            sb.append("You killed ").append(npcName).append(".");
+        if(enemy.isDead()){
+            sb.append("You killed ").append(enemy.getName()).append(". ");
+            sb.append(enemy.getDeathSound());
             currentRoom.removeEnemy(enemy);
             return sb.toString();
         }
 
         //Attack from Enemy
-        attackValue = enemyFightStats.getAttack();
-        damage = playerFightStats.attacked(attackValue);
-        sb.append("The ").append(npcName).append(" attacked you and made ").append(damage).append(" damage.");
+        attackValue = enemy.getAttack();
+        damage = currentPlayer.attacked(attackValue);
+        sb.append(enemy.getAttackSound()).append(" and made ").append(damage).append(" damage.");
 
         //Check if Player is Dead
-        if(playerFightStats.isDead()){
-            sb.append("The ").append(npcName).append(" killed you.");
+        if(currentPlayer.isDead()){
+            sb.append("The ").append(enemy.getName()).append(" killed you.");
         }
 
         return sb.toString();

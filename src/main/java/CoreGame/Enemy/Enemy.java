@@ -1,32 +1,27 @@
 package CoreGame.Enemy;
 
-import CoreGame.*;
+import CoreGame.Character;
 
-public class Enemy implements IEnemy, java.io.Serializable{
+public class Enemy extends Character implements IEnemy, java.io.Serializable{
 
-    private FightStats fightStats;
-    private String name;
-    private String description;
+    private Breed breed;
 
-    public Enemy(String name, String description, int health, int attack, int defence){
-        this.name = name;
-        this.description = description;
-        fightStats = new FightStats(health, attack, defence);
+    public Enemy(Breed breed){
+        super(breed.getHealth(), breed.getAttack(), breed.getDefence());
+        this.breed = breed;
     }
-    public Enemy(String name, String description, FightStats fightStats){
-        this.description = description;
-        this.name = name;
-        this.fightStats = fightStats;
-    }
+
 
     public String getName() {
-        return name;
+        return breed.getName();
     }
     public String getDescription() {
-        return description;
+        return breed.getDescription();
     }
-
-    public FightStats getFightStats() {
-        return fightStats;
+    public String getDeathSound(){
+        return breed.getDeathSound();
+    }
+    public String getAttackSound(){
+        return breed.getAttackSound();
     }
 }

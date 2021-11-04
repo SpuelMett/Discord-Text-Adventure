@@ -1,6 +1,6 @@
 package CoreGame;
 
-public class FightStats implements java.io.Serializable{
+public abstract class Character {
 
     int health;
     int maxHealth;
@@ -8,7 +8,7 @@ public class FightStats implements java.io.Serializable{
     int attack;
     int defence;
 
-    public FightStats(int health, int attack, int defense){
+    public Character(int health, int attack, int defense){
         this.health = health;
         this.maxHealth = health;
         this.attack = attack;
@@ -18,7 +18,6 @@ public class FightStats implements java.io.Serializable{
     public int getHealth(){
         return health;
     }
-
     public int getAttack() {
         return attack;
     }
@@ -34,7 +33,6 @@ public class FightStats implements java.io.Serializable{
     public void removeDefence(int value){
         defence -= value;
     }
-
     /**
      * Return false, if the controller dies
      * @param damage
@@ -46,14 +44,12 @@ public class FightStats implements java.io.Serializable{
         health -= hit;
         return hit;
     }
-
     public int getDefence() {
         return defence;
     }
     public void removeDefense(int value){
         defence -= value;
     }
-
     public boolean isDead(){
         return health == 0;
     }

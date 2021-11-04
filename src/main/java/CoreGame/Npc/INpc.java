@@ -1,4 +1,4 @@
-package CoreGame;
+package CoreGame.Npc;
 
 public interface INpc {
     String getName();

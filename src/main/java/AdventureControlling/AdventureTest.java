@@ -3,6 +3,8 @@ package AdventureControlling;
 import CoreGame.*;
 import CoreGame.Items.*;
 import CoreGame.Enemy.*;
+import CoreGame.Npc.INpc;
+import CoreGame.Npc.Npc;
 import CoreGame.Room.Room;
 import Parsing.*;
 
@@ -23,7 +25,7 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
     ArrayList<Player> playerList;
 
     Parser parser;
-    CommandHandler commandHandler;
+
 
     //standard values
     Room startRoom;
@@ -48,11 +50,16 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
         room2.addItem(drink1);
 
         //Enemies
-        FightStats dragonFightStats = new FightStats(10, 11, 5);
-        dragon1 = new Enemy("Dragon", "This is a terrifying dragon.", dragonFightStats);
+        Breed troll = new Breed(null, "Troll", "A normal troll.", "The troll hit you with his big fist", "The troll falls backwards.",10, 5, 10);
+        Breed trollArcher = new Breed(troll, "Troll Archer", "A troll with a bow.","The troll hit you with an arrow of his bow", null,  0, 7, 0);
+        Breed dragon = new Breed(null, "Dragon", "A terrifying Dragon.", "The dragon hit you with his sharp claws", "The dragon died.", 10, 10, 1);
+
+        IEnemy troll1 = new Enemy(troll);
+        IEnemy dragon1 = new Enemy(dragon);
+
         room1.addEnemy(dragon1);
 
-        //Enemies
+        //NPCs
         npc1 = new Npc("Asmus","Normal NPC", "Did you know, that you can equip a weapon to fight with?");
         room2.addNpc(npc1);
 

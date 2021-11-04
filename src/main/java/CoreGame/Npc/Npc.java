@@ -1,4 +1,4 @@
-package CoreGame;
+package CoreGame.Npc;
 
 public class Npc implements INpc, java.io.Serializable{
 
