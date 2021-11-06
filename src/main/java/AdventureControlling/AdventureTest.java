@@ -19,6 +19,7 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
     IDoor door12;
     IItem food1, drink1;
     IItem woodSword,ironSword, armor1;
+    IItem book1;
     IEnemy dragon1;
     INpc npc1;
 
@@ -44,11 +45,14 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
         food1 = new Item("Apple", "A normal Apple", 1, 1, "food", 10);
         drink1 = new Item("Water", "A bottle of water", 1, 1,"drink",  20);
 
+        book1 = new ItemBook("Guide", "A guide to help started", 1, 0, "book", "Type help to get help!");
+
         //place Items
         room1.addItem(woodSword);
         room2.addItem(ironSword);
         room1.addItem(food1);
         room2.addItem(drink1);
+        room1.addItem(book1);
 
         //Enemies
         Breed troll = new Breed(null, "Troll", "A normal troll.", "The troll hit you with his big fist", "The troll falls backwards.",10, 5, 10);

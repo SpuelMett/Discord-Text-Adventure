@@ -31,6 +31,8 @@ public class CommandChanger {
             = {"unequip","deequip"};
     private static final String[] die
             = {"die"};
+    private static final String[] read
+            = {"read"};
 
 
     /**
@@ -52,6 +54,7 @@ public class CommandChanger {
         if(Arrays.asList(equip).contains(input)) return "equip";
         if(Arrays.asList(unequip).contains(input)) return "unequip";
         if(Arrays.asList(die).contains(input)) return "die";
+        if(Arrays.asList(read).contains(input)) return "read";
 
         //default
         return null;
@@ -74,7 +77,8 @@ public class CommandChanger {
         sb.append(attack[0]).append(", ");
         sb.append(equip[0]).append(", ");
         sb.append(unequip[0]).append(", ");
-        sb.append(die[0]);
+        sb.append(die[0]).append(", ");
+        sb.append(read[0]);
         return sb.toString();
     }
 }

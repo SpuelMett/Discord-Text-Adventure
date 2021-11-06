@@ -40,6 +40,7 @@ public class CommandHandler {
         if(commandString.equals("equip")) return equip();
         if(commandString.equals("unequip")) return unequip();
         if(commandString.equals("die")) return die();
+        if(commandString.equals("read")) return read();
 
         return "I don't know what you want.";
     }
@@ -279,6 +280,17 @@ public class CommandHandler {
     private String die(){
         currentPlayer.removeHydration(200);
         return "You died.";
+    }
+
+    private String read(){
+        if(!command.hasSecondWord()) return "What do you want to read?";
+        String itemName = command.getSecondWord();
+
+        IItem book = currentPlayer.getItem(itemName);
+        if(book == null) return "You don't have this book";
+        if(!book.getType().equals("book")) return "You cant read this.";
+        return book.getDescription();
+
     }
 
 }
