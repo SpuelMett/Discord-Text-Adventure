@@ -14,13 +14,10 @@ public class Save {
     }
 
     public boolean saveGameFile(GameFiles gameFile) {
-        try
+        try(FileOutputStream fileOut =new FileOutputStream("SavedGameFiles/saveFile1.ser"); //Dateiname und Pfad
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);)
         {
-            FileOutputStream fileOut =new FileOutputStream("SavedGameFiles/saveFile1.ser"); //Dateiname und Pfad
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(gameFile);
-            out.close();
-            fileOut.close();
         }
         catch (IOException i) {
             i.printStackTrace();

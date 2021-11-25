@@ -13,18 +13,16 @@ public class Load {
     }
 
     /**
-     * Tries to Load a SaveGameFile. If there is nothing create a new GameFile
+     * Tries to Load a SaveGameFile. If there is nothing create a new GameFile. Closes fileIn and in automatically.
      * @return
      */
     public GameFiles loadGameFiles(){
         GameFiles gameFiles;
 
-        try{
-            FileInputStream fileIn = new FileInputStream("SavedGameFiles/saveFile2.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
+        try(FileInputStream fileIn = new FileInputStream("SavedGameFiles/saveFile1.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);)
+        {
             gameFiles = (GameFiles) in.readObject();
-            in.close();
-            fileIn.close();
         }
         catch (IOException i){
             return new GameFiles();
