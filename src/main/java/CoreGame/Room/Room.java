@@ -5,6 +5,7 @@ import CoreGame.IDoor;
 import CoreGame.Npc.INpc;
 import CoreGame.Inventory.Inventory;
 import CoreGame.Items.*;
+import CoreGame.Player.Player;
 
 import java.util.ArrayList;
 
@@ -58,6 +59,46 @@ public class Room implements java.io.Serializable{
         return null;
     }
 
+    public String changeRoom(Player player, String direction){
+        //check for enemies
+        if(hasEnemy()) return "An Enemy is blocking your way!";
+
+        //check for doors
+        IDoor door = getDoor(direction);
+        if(door == null) return "There is nothing in this direction.";
+
+        //check if the door is locked. If yes check if the player has the key to open it
+        String result = "";
+        if(door.isLocked()){
+            if(player.hasItem(door.getKey())){
+                door.unlock();
+                result = "You open the Door with " + door.getKey().getName();
+            }
+            else {
+                return "The door is locked.";
+            }
+        }
+
+        //change room in player object
+        Room newRoom = door.open(this);
+
+        //If there is a new Room change the player Room and paste the Room description
+        if(newRoom != null){
+            player.changeRoom(newRoom);
+            result += "\n" + newRoom.getDescription();
+
+            //remove saturation
+            player.removeSatiation(1);
+            return result;
+        }
+        //If there is no new room
+        else{
+            result += "\n" + "There is no Room in this direction.";
+        }
+
+        return result;
+    }
+
     public void addItem(IItem newItem){
         inventory.addItem(newItem);
     }
@@ -87,6 +128,9 @@ public class Room implements java.io.Serializable{
     }
     public boolean removeEnemy(IEnemy enemy){
         return enemyList.remove(enemy);
+    }
+    private boolean hasEnemy(){
+        return !(enemyList.size() == 0);
     }
 
 

@@ -50,48 +50,12 @@ public class CommandHandler {
      * @return
      */
     private String go(){
-        String result = "";
-
         //Check if command has second word
         if(!command.hasSecondWord()) return "Where do you want to go?";
-
         //get the next room
         Room currentRoom = currentPlayer.getRoom();
-        IDoor door = currentRoom.getDoor(command.getSecondWord());
-
-        //if there is no Room
-        if(door == null){
-            return "There is nothing in this direction.";
-        }
-
-        //check if the door is locked. If yes check if the player has the key to open it
-        if(door.isLocked()){
-            if(currentPlayer.hasItem(door.getKey())){
-                door.unlock();
-                result += "You open the Door with " + door.getKey().getName();
-            }
-            else {
-                return "The door is locked.";
-            }
-        }
-
-        //change room in player object
-        Room newRoom = door.open(currentRoom);
-
-        //If there is a new Room change the player Room and paste the Room description
-        if(newRoom != null){
-            currentPlayer.changeRoom(newRoom);
-            result += "\n" + newRoom.getDescription();
-
-            //remove saturation
-            currentPlayer.removeSatiation(1);
-            return result;
-        }
-        //If there is no new room
-        else{
-            result += "\n" + "There is no Room in this direction.";
-            return result;
-        }
+        //Changing the room is handled in the Room class
+        return currentRoom.changeRoom(currentPlayer, command.getSecondWord());
     }
 
     /**
