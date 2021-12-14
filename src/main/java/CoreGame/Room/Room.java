@@ -6,6 +6,7 @@ import CoreGame.Npc.INpc;
 import CoreGame.Inventory.Inventory;
 import CoreGame.Items.*;
 import CoreGame.Player.Player;
+import CoreGame.Trader.Trader;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class Room implements java.io.Serializable{
     ArrayList<INpc> npcList;
     ArrayList<IEnemy> enemyList;
     ArrayList<IDoor> doorList;
+    ArrayList<Trader> traderList;
 
     public Room(String name, String description){
         this.name = name;
@@ -24,6 +26,7 @@ public class Room implements java.io.Serializable{
         this.enemyList = new ArrayList<>();
         this.npcList = new ArrayList<>();
         this.doorList = new ArrayList<>();
+        this.traderList = new ArrayList<>();
 
         inventory = new Inventory();
     }
@@ -200,5 +203,15 @@ public class Room implements java.io.Serializable{
             else sb.append(doorList.get(i).getDirection(this)).append(", ");
         }
         return sb.toString();
+    }
+
+    public void addTrader(Trader trader){
+        traderList.add(trader);
+    }
+    public Trader getTrader(String traderName){
+        for(Trader trader:traderList){
+            if(trader.getName().equals(traderName)) return trader;
+        }
+        return null;
     }
 }

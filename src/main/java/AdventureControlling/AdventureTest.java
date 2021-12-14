@@ -7,6 +7,7 @@ import CoreGame.Npc.INpc;
 import CoreGame.Npc.Npc;
 import CoreGame.Player.Player;
 import CoreGame.Room.Room;
+import CoreGame.Trader.Trader;
 import Parsing.*;
 
 
@@ -22,6 +23,7 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
     IItem book1;
     IEnemy dragon1;
     INpc npc1;
+    Trader trader1;
 
     //Server server;
     ArrayList<Player> playerList;
@@ -67,6 +69,12 @@ public class AdventureTest implements IAdventure, java.io.Serializable{
         //NPCs
         npc1 = new Npc("Asmus","Normal NPC", "Did you know, that you can equip a weapon to fight with?");
         room2.addNpc(npc1);
+
+
+        //Traders
+        trader1 = new Trader("Carlos");
+        trader1.addItem(new Item("Shovel", "A very big spoon", 2, 1, "item", 0));
+        room1.addTrader(trader1);
 
         //standard values
         startRoom = room1;
