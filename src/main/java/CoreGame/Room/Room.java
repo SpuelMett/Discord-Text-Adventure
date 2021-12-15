@@ -133,7 +133,6 @@ public class Room implements java.io.Serializable{
         return !(enemyList.size() == 0);
     }
 
-
     /**
      * Return the full Description of the Room. Includes description, items, enemies and npcs.
      * @return
@@ -172,19 +171,6 @@ public class Room implements java.io.Serializable{
         }
         return sb.toString();
     }
-
-    /*
-    private String descriptionGenerator(String initialString, ArrayList<E> list){
-        StringBuilder sb = new StringBuilder();
-        sb.append(initialString);
-        int size = list.size();
-        for(int i=0;i<size;i++){
-            if(i == size -1) sb.append(list.get(i).getName());
-            else sb.append(enemyList.get(i).getName()).append(", ");
-        }
-    }
-    */
-
 
     /**
      * returns all possible directions

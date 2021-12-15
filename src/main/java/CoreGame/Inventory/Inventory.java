@@ -49,10 +49,7 @@ public class Inventory implements java.io.Serializable{
      * @return
      */
     public boolean hasItem(IItem checkItem){
-        for(IItem item : itemList){
-            if(item.equals(checkItem)) return true;
-        }
-        return false;
+        return itemList.contains(checkItem);
     }
 
     /**
