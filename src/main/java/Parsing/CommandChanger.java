@@ -33,6 +33,8 @@ public class CommandChanger {
             = {"die"};
     private static final String[] read
             = {"read"};
+    private static final String[] trade
+            = {"trade"};
 
 
     /**
@@ -55,6 +57,7 @@ public class CommandChanger {
         if(Arrays.asList(unequip).contains(input)) return "unequip";
         if(Arrays.asList(die).contains(input)) return "die";
         if(Arrays.asList(read).contains(input)) return "read";
+        if(Arrays.asList(trade).contains(input)) return "trade";
 
         //default
         return null;
@@ -78,7 +81,8 @@ public class CommandChanger {
         sb.append(equip[0]).append(", ");
         sb.append(unequip[0]).append(", ");
         sb.append(die[0]).append(", ");
-        sb.append(read[0]);
+        sb.append(read[0]).append(", ");
+        sb.append(trade[0]);
         return sb.toString();
     }
 }

@@ -6,6 +6,7 @@ import CoreGame.Items.*;
 import CoreGame.Npc.INpc;
 import CoreGame.Player.Player;
 import CoreGame.Room.Room;
+import CoreGame.Trader.Trader;
 import Parsing.*;
 
 public class CommandHandler {
@@ -41,6 +42,7 @@ public class CommandHandler {
         if(commandString.equals("unequip")) return unequip();
         if(commandString.equals("die")) return die();
         if(commandString.equals("read")) return read();
+        if(commandString.equals("trade")) return trade();
 
         return "I don't know what you want.";
     }
@@ -254,6 +256,35 @@ public class CommandHandler {
         if(book == null) return "You don't have this book";
         if(!book.getType().equals("book")) return "You cant read this.";
         return book.getDescription();
+
+    }
+
+    private String trade(){
+        if(!command.hasSecondWord()) return "With which person do you want to trade?";
+
+        Room room = currentPlayer.getRoom();
+        String traderName = command.getSecondWord();
+        Trader trader = room.getTrader(traderName);
+        if(trader == null){
+            return "You cant find a trader with this name here.";
+        }
+
+        String itemName = command.getThirdWord();
+        if(itemName == null) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here is a list of items you can buy. You can also sell something.");
+            sb.append("\n");
+            sb.append(trader.getItemListDescription());
+            return sb.toString();
+        }
+
+        //Check if player has this item
+        if(currentPlayer.hasItem(itemName)){
+            return currentPlayer.sellItem(itemName, trader);
+        }
+        else{
+            return trader.sell(itemName, currentPlayer);
+        }
 
     }
 

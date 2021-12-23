@@ -3,8 +3,7 @@ package CoreGame.Player;
 import CoreGame.Inventory.Inventory;
 import CoreGame.Items.*;
 import CoreGame.Room.Room;
-
-
+import CoreGame.Trader.Trader;
 
 
 public class Player implements java.io.Serializable{
@@ -14,6 +13,8 @@ public class Player implements java.io.Serializable{
     final int maxSatiation = 100;
     int hydration;
     final int maxHydration = 100;
+
+    private int money;
 
     //fighting stats
     IFightStatsModule fightStatsModule;
@@ -35,6 +36,8 @@ public class Player implements java.io.Serializable{
 
         this.satiation = 10;
         this.hydration = 10;
+
+        this.money = 5;
 
         this.room = room;
         inventory = new Inventory();
@@ -115,6 +118,9 @@ public class Player implements java.io.Serializable{
         sb.append(getStatDescription());
         sb.append("\n");
 
+        //Money Description
+        sb.append("Gold: ").append(money).append("\n");
+
         //Inventory Description
         sb.append(inventory.getDescription());
         return  sb.toString();
@@ -150,5 +156,47 @@ public class Player implements java.io.Serializable{
         return equipmentModule;
     }
 
+    /**
+     * Checks if player has enough money. If yes remove the money;
+     * @param value
+     * @return
+     */
+    public boolean removeMoney(int value){
+        if(money >= value){
+            money -= value;
+            return true;
+        }
+        else return false;
+    }
+
+    private void addMoney(int value){
+        money += value;
+    }
+
+    /**
+     * Tries to sell the item to a trader.
+     * @param itemName
+     * @param trader
+     * @return
+     */
+    public String sellItem(String itemName, Trader trader){
+        IItem item = getItem(itemName);
+        if(item == null) return "You don't have this.";
+        int value = trader.buy(item);
+        addMoney(value);
+        inventory.removeItem(item);
+        return "You sold " + itemName + " and got " + value + " gold for it.";
+    }
+
+    /**
+     * Checks if the player can buy the item.
+     * Currently check only if enough money.
+     * Not added weight limit yet.
+     * @param price
+     * @return
+     */
+    public boolean buyItem(int price){
+        return removeMoney(price);
+    }
 
 }

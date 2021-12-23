@@ -6,6 +6,7 @@ import CoreGame.Npc.INpc;
 import CoreGame.Inventory.Inventory;
 import CoreGame.Items.*;
 import CoreGame.Player.Player;
+import CoreGame.Trader.Trader;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class Room implements java.io.Serializable{
     ArrayList<INpc> npcList;
     ArrayList<IEnemy> enemyList;
     ArrayList<IDoor> doorList;
+    ArrayList<Trader> traderList;
 
     public Room(String name, String description){
         this.name = name;
@@ -24,6 +26,7 @@ public class Room implements java.io.Serializable{
         this.enemyList = new ArrayList<>();
         this.npcList = new ArrayList<>();
         this.doorList = new ArrayList<>();
+        this.traderList = new ArrayList<>();
 
         inventory = new Inventory();
     }
@@ -141,6 +144,7 @@ public class Room implements java.io.Serializable{
         StringBuilder sb = new StringBuilder();
         sb.append(description).append("\n");
         sb.append(directionDescription()).append("\n");
+        sb.append(traderDescription()).append("\n");
         sb.append(itemDescription()).append("\n");
         sb.append(enemyDescription()).append("\n");
         sb.append(npcDescription());
@@ -184,6 +188,27 @@ public class Room implements java.io.Serializable{
         for(int i = 0;i<size;i++){
             if(i == size -1) sb.append(doorList.get(i).getDirection(this));
             else sb.append(doorList.get(i).getDirection(this)).append(", ");
+        }
+        return sb.toString();
+    }
+
+    public void addTrader(Trader trader){
+        traderList.add(trader);
+    }
+    public Trader getTrader(String traderName){
+        for(Trader trader:traderList){
+            if(trader.getName().equals(traderName)) return trader;
+        }
+        return null;
+    }
+
+    private String traderDescription(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Trader: ");
+        int size = traderList.size();
+        for(int i = 0;i<size;i++){
+            if(i == size -1) sb.append(traderList.get(i).getName());
+            else sb.append(traderList.get(i).getName()).append(", ");
         }
         return sb.toString();
     }
