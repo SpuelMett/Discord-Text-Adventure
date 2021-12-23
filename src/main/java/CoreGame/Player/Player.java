@@ -118,6 +118,9 @@ public class Player implements java.io.Serializable{
         sb.append(getStatDescription());
         sb.append("\n");
 
+        //Money Description
+        sb.append("Gold: ").append(money).append("\n");
+
         //Inventory Description
         sb.append(inventory.getDescription());
         return  sb.toString();

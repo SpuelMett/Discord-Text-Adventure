@@ -273,6 +273,8 @@ public class CommandHandler {
         if(itemName == null) {
             StringBuilder sb = new StringBuilder();
             sb.append("Here is a list of items you can buy. You can also sell something.");
+            sb.append("\n");
+            sb.append(trader.getItemListDescription());
             return sb.toString();
         }
 

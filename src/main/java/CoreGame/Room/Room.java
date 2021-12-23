@@ -145,6 +145,7 @@ public class Room implements java.io.Serializable{
         StringBuilder sb = new StringBuilder();
         sb.append(description).append("\n");
         sb.append(directionDescription()).append("\n");
+        sb.append(traderDescription()).append("\n");
         sb.append(itemDescription()).append("\n");
         sb.append(enemyDescription()).append("\n");
         sb.append(npcDescription());
@@ -213,5 +214,16 @@ public class Room implements java.io.Serializable{
             if(trader.getName().equals(traderName)) return trader;
         }
         return null;
+    }
+
+    private String traderDescription(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Trader: ");
+        int size = traderList.size();
+        for(int i = 0;i<size;i++){
+            if(i == size -1) sb.append(traderList.get(i).getName());
+            else sb.append(traderList.get(i).getName()).append(", ");
+        }
+        return sb.toString();
     }
 }
